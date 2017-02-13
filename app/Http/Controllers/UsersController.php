@@ -12,13 +12,10 @@ class UsersController extends Controller
 {
 	// return specific data for normal users (id, name , barcode) to show it for admin 
      public function getUsers(Request $request){
-     	$users = User::select('users.name','barcodes.user_id','barcodes.id','barcodes.text','barcodes.format')
-					    ->where('users.role','user')
-					    ->join('barcodes', 'users.id', '=', 'barcodes.user_id')
-					    // ->groupBy('barcodes.user_id')
-					    // ->toArray()
-					    ->get;
-
-        return $users;
+		$r = User::with('Barcodes')
+					->select('users.id','users.name')
+					->where('users.role','user')
+					->get();
+		return $r;
      }
 }

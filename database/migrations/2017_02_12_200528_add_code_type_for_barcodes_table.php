@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddRoleToUsersTable extends Migration
+class AddCodeTypeForBarcodesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,8 @@ class AddRoleToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->enum('role', ['user', 'admin'])->after('email');        
+        Schema::table('barcodes', function (Blueprint $table) {
+            $table->enum('code_type', ['clothes', 'shoes','vegetable','chips'])->after('format');        
         });
     }
 
@@ -24,8 +24,8 @@ class AddRoleToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('role');
+        Schema::table('barcodes', function (Blueprint $table) {
+            $table->dropColumn('code_type');
         });
     }
 }
